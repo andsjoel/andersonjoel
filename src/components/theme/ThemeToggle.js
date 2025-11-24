@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FiSun, FiMoon } from "react-icons/fi";
 import "./theme.css";
 
 const ThemeToggle = () => {
@@ -13,18 +14,25 @@ const ThemeToggle = () => {
             localStorage.setItem("theme", "dark");
         } else {
             document.body.classList.remove("dark-theme");
-            localStorage.setItem("theme", "light")
+            localStorage.setItem("theme", "light");
         }
+
+        document.dispatchEvent(new Event("theme-change"));
     }, [dark]);
 
-    return(
+    return (
         <button
-            className="theme-toggle"
+            className={`theme-toggle ${dark ? "dark" : "light"}`}
             onClick={() => setDark(!dark)}
         >
-            {dark ? "Claro" : "Escuro"}
+            <span className="icon sun">
+                <FiSun />
+            </span>
+            <span className="icon moon">
+                <FiMoon />
+            </span>
         </button>
-    )
-}
+    );
+};
 
 export default ThemeToggle;

@@ -1,13 +1,41 @@
 .theme-toggle {
-  background-color: var(--button-bg);
+  background-color: transparent;
   color: var(--button-text);
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 8px;
+  border-radius: 50%;
   border: none;
   cursor: pointer;
-  transition: opacity 0.3s;
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: background-color 0.3s, color 0.3s, opacity 0.3s;
 }
 
 .theme-toggle:hover {
   opacity: 0.85;
+}
+
+.icon {
+  position: absolute;
+  font-size: 24px;
+  opacity: 0;
+  transform: scale(0.5) rotate(-90deg);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.theme-toggle.light .sun {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.theme-toggle.dark .moon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
 }

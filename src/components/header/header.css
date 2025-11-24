@@ -1,41 +1,118 @@
 .header {
-  background-color: var(--nav-bg);
-  color: var(--nav-text);
-  padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  padding: 16px 20px;
+  position: relative;
+  z-index: 10;
   border-bottom: 1px solid #ddd;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .logo {
-  font-size: 1.3rem;
-  font-weight: bold;
+  height: 38px;
+  z-index: 10;
 }
 
-.nav a {
-  margin-right: 20px;
-  text-decoration: none;
+.desktop-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.desktop-nav a {
   color: var(--nav-text);
+  text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
 }
 
-.nav a:hover {
+.desktop-nav a:hover {
   color: var(--accent-color);
 }
 
-.theme-toggle {
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  padding: 8px 14px;
-  border-radius: 6px;
+
+/* ######################### BURGUER BTN */
+
+.hamburger {
+  width: 32px;
+  height: 28px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
   border: none;
   cursor: pointer;
-  transition: opacity 0.3s;
+  padding: 0;
+  z-index: 10;
 }
 
-.theme-toggle:hover {
-  opacity: 0.85;
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 6px;
+  background: var(--nav-text);
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-12px) rotate(-45deg);
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.mobile-menu.show {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  font-size: 1.8rem;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.mobile-menu a:hover {
+  color: var(--accent-color);
+}
+
+/* Centraliza também o botão de tema */
+.mobile-theme-toggle {
+  margin-top: 40px;
+}
+
+
+/* ######################### MOBILE */
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
