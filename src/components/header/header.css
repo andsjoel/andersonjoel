@@ -1,0 +1,41 @@
+.header {
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  transition: background 0.3s, color 0.3s;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: var(--nav-text);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: var(--accent-color);
+}
+
+.theme-toggle {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.theme-toggle:hover {
+  opacity: 0.85;
+}

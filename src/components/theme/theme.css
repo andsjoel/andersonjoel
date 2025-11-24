@@ -1,0 +1,13 @@
+.theme-toggle {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.theme-toggle:hover {
+  opacity: 0.85;
+}
