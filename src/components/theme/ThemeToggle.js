@@ -1,38 +1,20 @@
-import { useEffect, useState } from "react";
 import { FiSun, FiMoon } from "react-icons/fi";
+import { useTheme } from "../../context/ThemeContext";
 import "./theme.css";
 
 const ThemeToggle = () => {
-    const [dark, setDark] = useState(() => {
-        const savedTheme = localStorage.getItem("theme");
-        return savedTheme === "dark";
-    });
+  const { theme, toggleTheme } = useTheme();
 
-    useEffect(() => {
-        if (dark) {
-            document.body.classList.add("dark-theme");
-            localStorage.setItem("theme", "dark");
-        } else {
-            document.body.classList.remove("dark-theme");
-            localStorage.setItem("theme", "light");
-        }
-
-        document.dispatchEvent(new Event("theme-change"));
-    }, [dark]);
-
-    return (
-        <button
-            className={`theme-toggle ${dark ? "dark" : "light"}`}
-            onClick={() => setDark(!dark)}
-        >
-            <span className="icon sun">
-                <FiSun />
-            </span>
-            <span className="icon moon">
-                <FiMoon />
-            </span>
-        </button>
-    );
+  return (
+    <button
+      className={`theme-toggle ${theme}`}
+      aria-label="Alternar tema claro/escuro"
+      onClick={toggleTheme}
+    >
+      <span className="icon sun"><FiSun /></span>
+      <span className="icon moon"><FiMoon /></span>
+    </button>
+  );
 };
 
 export default ThemeToggle;

@@ -1,35 +1,29 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
 import ThemeToggle from "../theme/ThemeToggle";
+
 import LogoDark from "../../assets/images/logo/logo-dark.svg";
 import LogoLight from "../../assets/images/logo/logo-light.svg";
+
 import "./header.css";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  const closeMenu = () => setMenuOpen(false);
-
-  useEffect(() => {
-    const handler = () => {
-      const savedTheme = localStorage.getItem("theme") || "light";
-      setTheme(savedTheme);
-    };
-
-    document.addEventListener("theme-change", handler);
-
-    return () => {
-      document.removeEventListener("theme-change", handler);
-    };
-  }, []);
+  const { theme } = useTheme();
 
   const logoSrc = theme === "dark" ? LogoLight : LogoDark;
 
   return (
     <header className="header">
 
-      <img src={logoSrc} alt="AJ - abreviação de Anderson Joel" className="logo" />
+      <Link to="/" className="logo-wrapper" aria-label="Ir para a página inicial">
+        <img
+          src={logoSrc}
+          alt="AJ - Abreviação de Anderson Joel"
+          className="logo"
+        />
+      </Link>
 
       <nav className="nav desktop-nav">
         <Link to="/">Início</Link>
@@ -43,18 +37,24 @@ const Header = () => {
       <button
         className={`hamburger ${menuOpen ? "open" : ""}`}
         onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Abrir menu"
+        aria-label="Abrir ou fechar menu de navegação"
+        aria-expanded={menuOpen}
+        aria-controls="mobile-menu"
       >
         <span />
         <span />
         <span />
       </button>
 
-      <nav className={`mobile-menu ${menuOpen ? "show" : ""}`}>
-        <Link to="/" onClick={closeMenu}>Início</Link>
-        <Link to="/sobre" onClick={closeMenu}>Sobre</Link>
-        <Link to="/certificados" onClick={closeMenu}>Certificados</Link>
-        <Link to="/blog" onClick={closeMenu}>Blog</Link>
+      <nav
+        id="mobile-menu"
+        className={`mobile-menu ${menuOpen ? "show" : ""}`}
+        aria-hidden={!menuOpen}
+      >
+        <Link to="/" onClick={() => setMenuOpen(false)}>Início</Link>
+        <Link to="/sobre" onClick={() => setMenuOpen(false)}>Sobre</Link>
+        <Link to="/certificados" onClick={() => setMenuOpen(false)}>Certificados</Link>
+        <Link to="/blog" onClick={() => setMenuOpen(false)}>Blog</Link>
 
         <div className="mobile-theme-toggle">
           <ThemeToggle />
